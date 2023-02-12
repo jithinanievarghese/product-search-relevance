@@ -152,4 +152,52 @@ So our final training data contains
 </p>
 <strong>NB</strong> : Since we only added 78 images manually (48 Target 0 + 28 Target 1). It wasn’t much of a time-consuming process. 
 
+<img src="https://user-images.githubusercontent.com/78400305/218319617-413db23d-9765-4900-a671-862d73595f83.png" width="1000" height="200">
+
+#### Model Training
+ 
+Here we have trained a deep-learning CNN network using PyTorch. The training of the model was done using the following Kaggle Notebook. 
+[Kaggle Notebook]  
+Image Augmentation, Early Stopping and Dropout Layers were added to reduce overfitting.
+
+#### Model Performance
+
+Model with the best validation accuracy of 98.26% was saved during the training. As we discussed earlier our model performance metric is really validated based on the f1 score and confusion matrix.
+<p align="center">
+<img src="https://user-images.githubusercontent.com/78400305/218321163-82995623-754d-4171-a515-be93e6e1c782.png" width="900" height="400">
+</p>
+
+Even though our accuracy is 98.26%, When we inspect the validation and training loss curve, we can see that the model is slightly overfitted.
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/78400305/218321267-c8636b0c-dc0e-448a-ac14-ab79a10f8e22.png" width="600" height="400">
+</p>
+
+#### Model Validation and Inference
+To validate the perfomance of model on unseen datasets, we used 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/78400305/218323450-ded93a8e-0313-4569-90f2-9c18383eae65.png" width="900" height="400">
+</p>
+
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/78400305/218323465-3376d5e1-c729-4f44-b72f-1b2e9f9d2433.png" width="650" height="350">
+</p>
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/78400305/218323478-a9c45b2a-bdcf-4d89-9579-a8f509098b1c.png" width="650" height="350">
+</p>
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/78400305/218323519-3ea5dafe-bf50-4403-a73f-da5d2fd9109b.png" width="900" height="400">
+</p>
+
+
+[Inference notebook]
+
+
+
+
+
+
 
