@@ -4,7 +4,7 @@
 
 Eccomerce web scraping provides insight into pricing data, market dynamics, and competitors’ practices. But often a particular search query for a product in an e-commerce website may give us non-relevant products in our data. 
 
-For example, search queries `spider man car toy` and `spider man jacket` on the eCommerce website [flipkart.com](https://www.flipkart.com/search?q=spider%20man%20jacket&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off) gave us some products that are unrelated to spiderman.
+For example, search queries `spider man car toy` and `spider man jacket` on the eCommerce website [flipkart.com](https://www.flipkart.com/search?q=spider%20man%20jacket&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off) gave us some products that are unrelated to spiderman.  
 <img src="https://user-images.githubusercontent.com/78400305/218292800-df0aefcb-dcf2-4011-b90d-8ab2e3d92904.png" width="500" height="300"><img src="https://user-images.githubusercontent.com/78400305/218292673-237924c3-b61b-4668-aaeb-c77a95c43fc0.png" width="500" height="300">
 
 In a real-world scenario, we won't be using 3-4 keywords in our search, but more than 50 or 100 or even more. 
