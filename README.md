@@ -1,5 +1,11 @@
 # Web Scraping with product search relevance using NLP, rules and image classification
 
+## Project Flow
+
+<p align="center">
+  <img width="450" height="300" src="https://user-images.githubusercontent.com/78400305/218310437-94a0bc78-514a-42ce-a8e3-b4aa29bf2f2d.png">
+</p>
+
 ## Introduction
 
 Eccomerce web scraping provides insight into pricing data, market dynamics, and competitors’ practices. But often a particular search query for a product in an e-commerce website may give us non-relevant products in our data. 
@@ -11,12 +17,15 @@ In a real-world scenario, we won't be using 3-4 keywords in our search, but more
 
 
 
-So manually identifying the unwanted products in a large amount of data is a tedious task. Also, we don't scrape data once but on a daily, weekly, or monthly basis for price monitoring and to identify the new products that are launched by our competitors.
+So manually identifying the unwanted products in a large amount of data is a tedious task. Also, we don't scrape data once but on a daily, weekly, or monthly basis for price monitoring.
+Also to identify the new relevant products that are launched by our competitors, we need an automated solution.
+
+
 
 ## Approach to the Problem
 
 ### Using NLP or rules
-There are several approaches to the problem, but choosing one over another or a combination really depends on the ROI of the project
+There are several approaches to the problem, but choosing one over another or a combination really depends on the ROI of the project.
 One  cost-effective way is to use a rule-based approach or use string matching algorithms like [Levenshtein Distance](https://medium.com/analytics-vidhya/fuzzy-matching-in-python-2def168dee4a) to identify the relevant products from the product title.
 
 [Link to the notebook]
@@ -89,7 +98,7 @@ So with the help of image classification, we can identify the products. But for 
 If we have 50k products, we need to send an additional 50k image requests to the image URLs of products which adds up to the cost of data gathering.
 
 Also training a model, its optimization, developer cost, and deployment also add up to the entire cost. So implementing image classification really depends on our ROI. 
-So it is our call to whether we need to implement the image classification model for finding the product images. 
+So it is our call to decide whether we need to implement the image classification model for finding the product images. 
 If that approach really adds value to our business requirements, then we should implement it.
 
 For now, we have gathered data for 5 search queries "spider man car toy", "spider man mug", "spider man jacket", "spider man hoodies" and "spiderman t shirt". The total unique products for all search queries at the time of scraping was 2233. 
@@ -128,7 +137,19 @@ From their datasets, we were able to gather Target 0 images for our training dat
 
 We ignored the available toys data in the 3rd dataset because there may be a chance of spiderman toys in that dataset and it will affect our model performance.
 
+We can even use a pre-trained model in this process, but for now, I would like to do things from scratch for a better understanding of the problem and domain. 
 
-
+So our final training data contains
+1. 1124 relevant product images (Target 1)
+2. Random Images (Target 0) were taken equally from the above 3 open source datasets 
+3. In order to improve our model performance I have added around 48 toy images (Target 0 ) from our unidentified product images by manual work. 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/78400305/218313268-1df7e7af-f998-4bc7-b922-a613308f72bf.png" width="600" height="300">
+</p>
+4. Similarly Extra 28 (Target 1) images, like spiderman logo images, spider-verse images from google Images, and some spiderman t-shirt images (from our unidentified product images by manual work) which were failed to identify by our model in the initial training stages. 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/78400305/218313584-13ce3f6c-12bb-4398-976f-9ec4abde66ad.png" width="600" height="300">
+</p>
+<strong>NB</strong> : Since we only added 78 images manually (48 Target 0 + 28 Target 1). It wasn’t much of a time-consuming process. 
 
 
