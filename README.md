@@ -15,6 +15,7 @@ So manually identifying the unwanted products in a large amount of data is a ted
 
 ## Approach to the Problem
 
+### Using NLP or rules
 There are several approaches to the problem, but choosing one over another or a combination really depends on the ROI of the project
 One  cost-effective way is to use a rule-based approach or use string matching algorithms like [Levenshtein Distance](https://medium.com/analytics-vidhya/fuzzy-matching-in-python-2def168dee4a) to identify the relevant products from the product title.
 
@@ -83,7 +84,7 @@ Example for the following [product](https://www.flipkart.com/viaan-boys-cartoon-
 
 <img src="https://user-images.githubusercontent.com/78400305/218293631-c3622e30-4feb-4a24-b4c2-60d8df7ffa75.png" width="500" height="300"><img src="https://user-images.githubusercontent.com/78400305/218293636-5f9d236f-7531-4947-9c9e-aaa66b627ba4.png" width="500" height="300">
 
-
+### Image classification
 So with the help of image classification, we can identify the products. But for that, we need to gather the images of products along with other product page requests in the data gathering. 
 If we have 50k products, we need to send an additional 50k image requests to the image URLs of products which adds up to the cost of data gathering.
 
@@ -116,9 +117,18 @@ no of products identified: 1175
 no of relevant product images after removing duplicated image urls: 1124
 ```
 
-Some of the products had the same image URLs, so after removing the duplicates we had around known 1124 relevant product images and we labeled them as class 1 or Target 1. For class 2 or Target 0 datasets, we can make use of open-source datasets that are available in our domain. 
+Some of the products had the same image URLs, so after removing the duplicates we had around known 1124 relevant product images and we labeled them as class 1 or Target 1. For class 2 or Target 0 data, we can make use of open-source datasets that are related to our domain i.e clothing, toys, and mugs. 
+Target 0 images mean data that shouldn't have a spiderman image. We need Images of T-shirts, hoodies, jackets, mugs, and toys that are not related to spiderman. We were able to source some clothing data from Kaggle. 
 
-We can even use a pre-trained model in this process, but for now, I would like to do things from scratch for a better understanding of the problem and domain
+I am extremely thankful to the following kaggle dataset contributors.  
+From their datasets, we were able to gather Target 0 images for our training data
+1. https://www.kaggle.com/datasets/sunnykusawa/tshirts
+2. https://www.kaggle.com/datasets/dqmonn/zalando-store-crawl
+3. https://www.kaggle.com/datasets/rhtsingh/130k-images-512x512-universal-image-embeddings
+
+We ignored the available toys data in the 3rd dataset because there may be a chance of spiderman toys in that dataset and it will affect our model performance.
+
+
 
 
 
