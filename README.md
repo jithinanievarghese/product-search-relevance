@@ -174,7 +174,7 @@ Even though our accuracy is **98.26%**, When we inspect the validation and train
 <img src="https://user-images.githubusercontent.com/78400305/218321267-c8636b0c-dc0e-448a-ac14-ab79a10f8e22.png" width="600" height="400">
 </p>
 
-#### Model Performance Validation and Inference
+#### Inference
 Detailed  in [Inference notebook](https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb)  
 To validate the perfomance of our model on unseen datasets, we gathered a subset of 28 images from unidentified products.
 <p align="center">
@@ -204,7 +204,7 @@ Also, the model miss predicted 5 non-relevant products as Target 1 or relevant o
 3. Fine Tuning pre-trained models like Inceptionv3, NASNetLarge, etc for our use case. But here the model size will be large. Large-size models can be a deployment concern for us, especially when considering the ROI.
 4. Testing with more Image augmentation techniques other than random zoom and brightness[link to code]. Like we can augment the images and add it as additional data, then retrain the model.
 
-##### Final Predictions
+#### Final Predictions
 Detailed  in [Inference notebook](https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb)
 
 On the final predictions of model on unseen or unidentified product images 317 products predicted as relevant and 198 as non-relevant
@@ -212,7 +212,7 @@ On the final predictions of model on unseen or unidentified product images 317 p
   <img width="500" height="400" src="https://user-images.githubusercontent.com/78400305/218379926-9f52f902-70b9-4615-b1fe-10b461107f0a.png">
 </p>
 
-### Deployment Flow
+### Deployment Flow and Conclusion
 
 Currently deployment of the project is in progress. Our model will be deployed as an API with input request of image tensors or image numpy array and we expect the probability of Target 1 and Target 0 in the response of that API call. Also, one of the better methods to reduce the API call and image requests is by identifying the relevant products at the product title level. We will use our string matching function to validate the product title, if the function returns True we will save the data if false then we will send the request to the product image and validate that image with the model API call.
 
@@ -224,6 +224,7 @@ the expected flow of the Scrapy spider will be as follows:
 </p>
 
 ### Resources
+
 Data Gathering Spider(Scrapy):    
 Data preprocessing:   
 Image Classification Code : https://github.com/jithinanievarghese/image_classification_pytorch  
