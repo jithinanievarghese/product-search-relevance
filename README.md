@@ -188,7 +188,8 @@ To validate the perfomance of our model on unseen datasets, we gathered a subset
 </p>
 
 - The accuracy of our model on unseen data is only **76.92%** but we have a better f1 score of **80%**. 
-- When we inspect the confusion matrix, out of 13 relevant products we predicted 12 products correctly, there was only one miss prediction. So model performs well in identifying the relevant products
+- When we inspect the confusion matrix, out of 13 relevant products we predicted 12 products correctly, there was only one miss prediction.
+- So model performs well in identifying the relevant products.
 - Also, the model miss predicted 5 non-relevant products as Target 1 or relevant ones. But as we discussed earlier, our primary aim was to identify relevant products. 
 - From that perspective, our model performed well with minimum manual labeling (76 images) and proper use of open-source datasets. 
 - With further optimization techniques, we can achieve a better model which can perform well in the prediction of Target 0 images.
