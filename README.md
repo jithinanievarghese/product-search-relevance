@@ -28,7 +28,7 @@ Also to identify the new relevant products that are launched by our competitors,
 There are several approaches to the problem, but choosing one over another or a combination really depends on the ROI of the project.
 One  cost-effective way is to use a rule-based approach or use string matching algorithms like [Levenshtein Distance](https://medium.com/analytics-vidhya/fuzzy-matching-in-python-2def168dee4a) to identify the relevant products from the product title.
 
-[Link to the notebook]
+##### Code: [Data pre-processing](https://github.com/jithinanievarghese/flipkart_scraper_scrapy/blob/main/flipkart_scraper/flipkart_scraper/data%20preprocesing%20product%20search%20relevance.ipynb)
 
 
 
@@ -175,7 +175,7 @@ Even though our accuracy is **98.26%**, When we inspect the validation and train
 </p>
 
 #### Inference
-Detailed  in [Inference notebook](https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb)  
+##### Code: [Inference notebook](https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb)  
 To validate the perfomance of our model on unseen datasets, we gathered a subset of 28 images from unidentified products.
 <p align="center">
 <img src="https://user-images.githubusercontent.com/78400305/218323450-ded93a8e-0313-4569-90f2-9c18383eae65.png" width="900" height="400">
@@ -205,7 +205,7 @@ Also, the model miss predicted 5 non-relevant products as Target 1 or relevant o
 4. Testing with more Image augmentation techniques other than random zoom and brightness[link to code]. Like we can augment the images and add it as additional data, then retrain the model.
 
 #### Final Predictions
-Detailed  in [Inference notebook](https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb)
+Detailed in [Inference notebook](https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb)
 
 On the final predictions of model on unseen or unidentified product images 317 products predicted as relevant and 198 as non-relevant
 <p align="center">
