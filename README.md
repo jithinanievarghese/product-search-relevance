@@ -9,7 +9,7 @@
 ## Introduction
 
 E-commerce web scraping provides valuable insights into pricing data, market dynamics, and competitors practices.   
-But often a particular search query in an e-commerce website may give us non-relevant products in our data. 
+But often, a particular search query in an e-commerce website may give us non-relevant products in our data. 
 
 For example, search queries `spider man car toy` and `spider man jacket` on the e-commerce website [flipkart.com](https://www.flipkart.com/search?q=spider%20man%20jacket&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off) gave us some products that are not related to spiderman car, toy or jacket.  
 
@@ -18,8 +18,8 @@ For example, search queries `spider man car toy` and `spider man jacket` on the 
 - In a real-world scenario, we won't be using 3-4 keywords in e-commerce scraping, but more than 50 or 100 or even more. 
 - So manually identifying the unwanted products in a large amount of data is a tedious task. 
 - These kind of non-relevant data are outliers in our gathered data and they dont add any value to our business requirements or data analysis
-- Also, we don't scrape data once, but on a daily, weekly, or monthly basis for price monitoring or to identify the new products that are launched by our competitors. 
-- So what if we need an automated solution for this i.e we can identify the unwanted products during the scraping and provide a clean dataset to our price monitoring or data analysis platform.
+- Also, we don't scrape data once, but on a daily, weekly, or monthly basis for price monitoring or to identify the new relevant products that are launched by our competitors. 
+- So what if we need an automated solution for this i.e we can identify the relevant products during the scraping and provide a clean dataset to our price monitoring or data analysis platform.
 
 
 ## Approach to the Problem
@@ -56,7 +56,7 @@ def process_title(text):
 
 def string_match_with_fuzz(text, threshold=90):
     """
-    to return true if text have a match with fuzzy partial ratio
+    to return true if text have a match with fuzz partial ratio
     """
     text = process_title(text)
     # tokenize the text using nltk tokenizer
@@ -95,7 +95,7 @@ Example for the following [product](https://www.flipkart.com/viaan-boys-cartoon-
 
 ### Image classification
 So with the help of image classification, we can identify the products. But for that, we need to gather the images of products along with other product page requests in the data gathering. 
-If we have 50k products, we need to send an additional 50k image requests to the image URLs of products which adds up to the cost of data gathering (We can reduce the image requests, discussed later in [Deployment, Scrape Flow and Conclusion](https://github.com/jithinanievarghese/product-search-relevance/edit/main/README.md#deployment-flow-and-conclusion)).
+If we have 50k products, we need to send an additional 50k image requests to the image URLs of products which adds up to the cost of data gathering (We can reduce the image requests, discussed later in [Deployment, Scrape Flow and Conclusion](https://github.com/jithinanievarghese/product-search-relevance/tree/main#deployment-scrape-flow-and-conclusion).
 
 - Also training a model, its optimization, developer cost, and deployment also add up to the entire cost. So implementing image classification really depends on our ROI. 
 - So it is our call to decide whether we need to implement the image classification model for finding the product images. 
@@ -169,7 +169,7 @@ Image Augmentation, Early Stopping and Dropout Layers were added to reduce overf
 
 #### Model Performance
 
-Model with the best validation accuracy of **98.26%** was saved during the training. As we discussed earlier our model performance metric is really validated based on the f1 score and confusion matrix.
+Model with the best validation accuracy of **98.26%** was saved during the training. As we discussed earlier, our model performance metric is really validated based on the f1 score and confusion matrix.
 Even though our accuracy is **98.26%**, When we inspect the validation and training loss curve, we can see that the model is slightly overfitted.
 
 <p align="center">
