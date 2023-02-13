@@ -104,10 +104,11 @@ If we have 50k products, we need to send an additional 50k image requests to the
 For now, we have gathered data for 5 search queries "spider man car toy", "spider man mug", "spider man jacket", "spider man hoodies" and "spiderman t shirt". 
 - The total unique products for all search queries at the time of scraping was 2233. 
 - We are considering this problem as a binary image classification problem.
+- We need to predict whether the product image is a relavant one or non-relevant one.
 - Our performance metrics will be f1-score and confusion matrix over accuracy since we need to know how well our model is going to identify the relevant products.
 
 But do we have any labeled training data 🤔? 
-Yes, we have partial training data 😃💡.
+Yes, we have partial labeled training data 😃💡.
 
 - In the entire process of finding the relevant title using a string matching algorithm, we got around 1175 out of 2233 products as relevant ones, this is a form of weak supervision to label the data.
 
@@ -119,7 +120,6 @@ print(f"time for processing: {time()-start} seconds", )
 relevant_products = df[~df.relevant_products_fuzz_match.isnull()]
 print("no of products identified:", relevant_products.shape[0])
 relevant_products = relevant_products.drop_duplicates(subset=['image_url'])
-relevant_products.shape
 print("no of relevant product images after removing duplicated image urls:", relevant_products.shape[0])
 ```
 #### Output
@@ -130,8 +130,10 @@ no of products identified: 1175
 no of relevant product images after removing duplicated image urls: 1124
 ```
 
-Some of the products had the same image URLs, so after removing the duplicates we had around known 1124 relevant product images and we labeled them as class 1 or Target 1. For class 2 or Target 0 data, we can make use of open-source datasets that are related to our domain i.e clothing, toys, and mugs. 
-Target 0 images mean data that shouldn't have a spiderman image. We need Images of T-shirts, hoodies, jackets, mugs, and toys that are not related to spiderman. We were able to source some clothing data from Kaggle. 
+- Some of the products had the same image URLs, so after removing the duplicates we had around known 1124 relevant product images and we labeled them as class 1 or Target 1. 
+- For class 2 or Target 0 data, we can make use of open-source datasets that are related to our domain i.e clothing, toys, and mugs. 
+Target 0 images mean data that shouldn't have a spiderman image. 
+- We need Images of T-shirts, hoodies, jackets, mugs, and toys that are not related to spiderman. We were able to source some clothing data from Kaggle. 
 
 I am extremely thankful to the following kaggle dataset contributors.  
 From their datasets, we were able to gather Target 0 images for our training data
@@ -185,10 +187,11 @@ To validate the perfomance of our model on unseen datasets, we gathered a subset
 <img src="https://user-images.githubusercontent.com/78400305/218323450-ded93a8e-0313-4569-90f2-9c18383eae65.png" width="900" height="400">
 </p>
 
-The accuracy of our model on unseen data is only **76.92%** but we have a better f1 score of **80%**. 
-When we inspect the confusion matrix, out of 13 relevant products we predicted 12 products correctly, there was only one miss prediction. So model performs well in identifying the relevant products
-
-Also, the model miss predicted 5 non-relevant products as Target 1 or relevant ones. But as we discussed earlier, our primary aim was to identify relevant products. From that perspective, our model performed well with minimum manual labeling (76 images) and proper use of open-source datasets. With further optimization techniques, we can achieve a better model which can perform well in the prediction of Target 0 images.
+- The accuracy of our model on unseen data is only **76.92%** but we have a better f1 score of **80%**. 
+- When we inspect the confusion matrix, out of 13 relevant products we predicted 12 products correctly, there was only one miss prediction. - So model performs well in identifying the relevant products
+- Also, the model miss predicted 5 non-relevant products as Target 1 or relevant ones. But as we discussed earlier, our primary aim was to identify relevant products. 
+- From that perspective, our model performed well with minimum manual labeling (76 images) and proper use of open-source datasets. 
+- With further optimization techniques, we can achieve a better model which can perform well in the prediction of Target 0 images.
 
 
 <p align="center">
@@ -206,22 +209,30 @@ Also, the model miss predicted 5 non-relevant products as Target 1 or relevant o
 1. [Data-Centric Approach](https://analyticsindiamag.com/big-data-to-good-data-andrew-ng-urges-ml-community-to-be-more-data-centric-and-less-model-centric/) - We often try to improve the model by hyperparameter tuning and other regularization techniques, but this approach is more dedicated to improving the training data. In our case our model doesn’t perform well in predicting Target 0 images, so we have to add more labeled Target 0 images to our training data and re-train the model. The initial implementation of manually labeled 76 images gave us a far better performance. But the Data-Centric approach is expensive as we need to manually label the data or use any weak supervision techniques.
 2. Using our existing model to label the unseen data and re-training our model with newly labeled data.
 3. Fine Tuning pre-trained models like Inceptionv3, NASNetLarge, etc for our use case. But here the model size will be large. Large-size models can be a deployment concern for us, especially when considering the ROI.
-4. Testing with more Image augmentation techniques other than random zoom and brightness[link to code]. Like we can augment the images and add it as additional data, then retrain the model.
+4. Testing with more Image augmentation techniques other than [random zoom and brightness](https://github.com/jithinanievarghese/image_classification_pytorch/blob/36bf1836ebf23df804ef57c533830cf7b828d973/dataset.py#L25). Like we can augment the images and add it as additional data, then retrain the model.
 
 #### Final Predictions
 Detailed in [Inference notebook](https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb)
 
-On the final predictions of model on unseen or unidentified product images 317 products predicted as relevant and 198 as non-relevant
+On the final predictions of model on unseen or unidentified product images, 317 products predicted as relevant and 198 as non-relevant
 <p align="center">
   <img width="500" height="400" src="https://user-images.githubusercontent.com/78400305/218379926-9f52f902-70b9-4615-b1fe-10b461107f0a.png">
 </p>
 
 ### Deployment, Scrape Flow and Conclusion
 
-Currently deployment of the project is in progress. Our model will be deployed as an API with input request of image tensors or image numpy array and we expect the probability of Target 1 and Target 0 in the response of that API call. Also, one of the better methods to reduce the API call and image requests is by identifying the relevant products at the product title level. We will use our string matching function to validate the product title, if the function returns True we will save the data if false then we will send the request to the product image and validate that image with the model API call.
+Since we need to find the relevant products during scraping, we need to deploy the model as an API (Currently deployment of the project is in progress.). Our model will be deployed as an API with input request of image path from our cloud platform or image url.  
+We expect the probability of Target 1 and Target 0 in the response of that API call. 
 
+- We will be using a combination of both NLP and image classification.
+- At first we will try to identify the relevant products at the product title level by our string matching algorithm. 
+- Major benefit is that we can reduce the image request for that identified product title, thereby reducing the cost in data gathering.
+- Even in our case 1175 out of 2233 products were identifed from product title ie 52% of total data.
+- Then we send requests to the product images for the products which were failed in string matching.
+- And validate the images with our API call.
+- Then we save the data
 
-the expected flow of the Scrapy spider will be as follows:
+The expected flow of the Scrapy spider will be as follows:
 
 <p align="center">
   <img width="300" height="700" src="https://user-images.githubusercontent.com/78400305/218374956-4306fdf8-25d0-494d-bc4c-bec66fa61f43.png">
