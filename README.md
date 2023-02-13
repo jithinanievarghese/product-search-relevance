@@ -199,8 +199,8 @@ Also, the model miss predicted 5 non-relevant products as Target 1 or relevant o
 
 ##### Some of the optimization techniques are:
 
-1. [Data-Centric Approach](https://analyticsindiamag.com/big-data-to-good-data-andrew-ng-urges-ml-community-to-be-more-data-centric-and-less-model-centric/) - We often try to improve the model by hyperparameter tuning and other regularization techniques, but this approach is more dedicated to improving the training data. In our case our model doesn’t perform well in predicting Target 0 images, so we have to add more labeled Target 0 images to our training data and retrain the model. The initial implementation of manually labeled 76 images gave us a far better performance. But the Data-Centric approach is expensive as we need to manually label the data or use any weak supervision techniques.
-2. Using our existing model to label the unseen data and retraining our model with newly labeled data.
+1. [Data-Centric Approach](https://analyticsindiamag.com/big-data-to-good-data-andrew-ng-urges-ml-community-to-be-more-data-centric-and-less-model-centric/) - We often try to improve the model by hyperparameter tuning and other regularization techniques, but this approach is more dedicated to improving the training data. In our case our model doesn’t perform well in predicting Target 0 images, so we have to add more labeled Target 0 images to our training data and re-train the model. The initial implementation of manually labeled 76 images gave us a far better performance. But the Data-Centric approach is expensive as we need to manually label the data or use any weak supervision techniques.
+2. Using our existing model to label the unseen data and re-training our model with newly labeled data.
 3. Fine Tuning pre-trained models like Inceptionv3, NASNetLarge, etc for our use case. But here the model size will be large. Large-size models can be a deployment concern for us, especially when considering the ROI.
 4. Testing with more Image augmentation techniques other than random zoom and brightness[link to code]. Like we can augment the images and add it as additional data, then retrain the model.
 
@@ -225,8 +225,8 @@ the expected flow of the Scrapy spider will be as follows:
 
 ### Resources
 
-Data Gathering Spider(Scrapy):    
-Data preprocessing:   
+Data Gathering Spider(Scrapy): https://github.com/jithinanievarghese/flipkart_scraper_scrapy     
+Data preprocessing:  [data preprocesing product search relevance](https://github.com/jithinanievarghese/flipkart_scraper_scrapy/blob/main/flipkart_scraper/flipkart_scraper/data%20preprocesing%20product%20search%20relevance.ipynb)  
 Image Classification Code : https://github.com/jithinanievarghese/image_classification_pytorch  
 Kaggle Notebook: https://www.kaggle.com/code/jithinanievarghese/image-classification-pytorch    
 Inference Notebook: https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb
