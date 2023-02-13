@@ -11,7 +11,7 @@
 E-commerce web scraping provides valuable insights into pricing data, market dynamics, and competitors practices.   
 But often a particular search query in an e-commerce website may give us non-relevant products in our data. 
 
-For example, search queries `spider man car toy` and `spider man jacket` on the e-commerce website [flipkart.com](https://www.flipkart.com/search?q=spider%20man%20jacket&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off) gave us some products that are not related to spiderman car toy or jacket.  
+For example, search queries `spider man car toy` and `spider man jacket` on the e-commerce website [flipkart.com](https://www.flipkart.com/search?q=spider%20man%20jacket&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off) gave us some products that are not related to spiderman car, toy or jacket.  
 
 <img src="https://user-images.githubusercontent.com/78400305/218292800-df0aefcb-dcf2-4011-b90d-8ab2e3d92904.png" width="500" height="300"><img src="https://user-images.githubusercontent.com/78400305/218292673-237924c3-b61b-4668-aaeb-c77a95c43fc0.png" width="500" height="300">
 
@@ -101,7 +101,7 @@ If we have 50k products, we need to send an additional 50k image requests to the
 - So it is our call to decide whether we need to implement the image classification model for finding the product images. 
 - If that approach really adds value to our business requirements, then we should implement it.
 
-For now, we have gathered data for 5 search queries "spider man car toy", "spider man mug", "spider man jacket", "spider man hoodies" and "spiderman t shirt". 
+For now, we have gathered data for 5 search queries `spider man car toy`, `spider man mug`, `spider man jacket`, `spider man hoodies` and `spiderman t shirt`. 
 - The total unique products for all search queries at the time of scraping was 2233. 
 - We are considering this problem as a binary image classification problem.
 - We need to predict whether the product image is a relavant one or non-relevant one.
