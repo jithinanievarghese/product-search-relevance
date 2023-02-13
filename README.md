@@ -162,22 +162,28 @@ Image Augmentation, Early Stopping and Dropout Layers were added to reduce overf
 
 #### Model Performance
 
-Model with the best validation accuracy of 98.26% was saved during the training. As we discussed earlier our model performance metric is really validated based on the f1 score and confusion matrix.
+Model with the best validation accuracy of **98.26%** was saved during the training. As we discussed earlier our model performance metric is really validated based on the f1 score and confusion matrix.
+Even though our accuracy is **98.26%**, When we inspect the validation and training loss curve, we can see that the model is slightly overfitted.
+
 <p align="center">
 <img src="https://user-images.githubusercontent.com/78400305/218321163-82995623-754d-4171-a515-be93e6e1c782.png" width="900" height="400">
 </p>
-
-Even though our accuracy is 98.26%, When we inspect the validation and training loss curve, we can see that the model is slightly overfitted.
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/78400305/218321267-c8636b0c-dc0e-448a-ac14-ab79a10f8e22.png" width="600" height="400">
 </p>
 
-#### Model Validation and Inference
-To validate the perfomance of model on unseen datasets, we used 
+#### Model Performance Validation and Inference
+Deatiled  in [Inference notebook]
+To validate the perfomance of our model on unseen datasets, we gathered a subset of 28 images from unidentified products.
 <p align="center">
 <img src="https://user-images.githubusercontent.com/78400305/218323450-ded93a8e-0313-4569-90f2-9c18383eae65.png" width="900" height="400">
 </p>
+
+The accuracy of our model on unseen data is only **76.92%** but we have a better f1 score of **80%**. 
+When we inspect the confusion matrix, out of 13 relevant products we predicted 12 products correctly, there was only one miss prediction. So model performs well in identifying the relevant products
+
+Also, the model miss predicted 5 non-relevant products as Target 1 or relevant ones. But as we discussed earlier, our primary aim was to identify relevant products. From that perspective, our model performed well with minimum manual labeling (78 images) and proper use of open-source datasets. With further optimization techniques, we can achieve a better model which can perform well in the prediction of Target 0 images.
 
 
 <p align="center">
@@ -188,12 +194,16 @@ To validate the perfomance of model on unseen datasets, we used
 <img src="https://user-images.githubusercontent.com/78400305/218323478-a9c45b2a-bdcf-4d89-9579-a8f509098b1c.png" width="650" height="350">
 </p>
 
-<p align="center">
-<img src="https://user-images.githubusercontent.com/78400305/218323519-3ea5dafe-bf50-4403-a73f-da5d2fd9109b.png" width="900" height="400">
-</p>
+
+##### Some of the optimization techniques are:
+
+1. [Data-Centric Approach](https://analyticsindiamag.com/big-data-to-good-data-andrew-ng-urges-ml-community-to-be-more-data-centric-and-less-model-centric/) - We often try to improve the model by hyperparameter tuning and other regularization techniques, but this approach is more dedicated to improving the training data. In our case our model doesn’t perform well in predicting Target 0 images, so we have to add more labeled Target 0 images to our training data and retrain the model. The initial implementation of manually labeled 78 images gave us a far better performance. But the Data-Centric approach is expensive as we need to manually label the data or use any weak supervision techniques.
+2. Using our existing model to label the unseen data and retraining our model with newly labeled data.
+3. Fine Tuning pre-trained models like Inceptionv3, NASNetLarge, etc for our use case. But here the model size will be large. Large-size models can be a deployment concern for us, especially when considering the ROI.
+4. Testing with more Image augmentation techniques other than random zoom and brightness[link to code]. Like we can augment the images and add it as additional data, then retrain the model.
 
 
-[Inference notebook]
+
 
 
 
