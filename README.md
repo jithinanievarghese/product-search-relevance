@@ -150,7 +150,7 @@ So our final training data contains
 <p align="center">
 <img src="https://user-images.githubusercontent.com/78400305/218313584-13ce3f6c-12bb-4398-976f-9ec4abde66ad.png" width="600" height="300">
 </p>
-<strong>NB</strong> : Since we only added 78 images manually (48 Target 0 + 28 Target 1). It wasn’t much of a time-consuming process. 
+<strong>NB</strong> : Since we only added 76 images manually (48 Target 0 + 28 Target 1). It wasn’t much of a time-consuming process. 
 
 <img src="https://user-images.githubusercontent.com/78400305/218319617-413db23d-9765-4900-a671-862d73595f83.png" width="1000" height="200">
 
@@ -183,7 +183,7 @@ To validate the perfomance of our model on unseen datasets, we gathered a subset
 The accuracy of our model on unseen data is only **76.92%** but we have a better f1 score of **80%**. 
 When we inspect the confusion matrix, out of 13 relevant products we predicted 12 products correctly, there was only one miss prediction. So model performs well in identifying the relevant products
 
-Also, the model miss predicted 5 non-relevant products as Target 1 or relevant ones. But as we discussed earlier, our primary aim was to identify relevant products. From that perspective, our model performed well with minimum manual labeling (78 images) and proper use of open-source datasets. With further optimization techniques, we can achieve a better model which can perform well in the prediction of Target 0 images.
+Also, the model miss predicted 5 non-relevant products as Target 1 or relevant ones. But as we discussed earlier, our primary aim was to identify relevant products. From that perspective, our model performed well with minimum manual labeling (76 images) and proper use of open-source datasets. With further optimization techniques, we can achieve a better model which can perform well in the prediction of Target 0 images.
 
 
 <p align="center">
@@ -197,15 +197,24 @@ Also, the model miss predicted 5 non-relevant products as Target 1 or relevant o
 
 ##### Some of the optimization techniques are:
 
-1. [Data-Centric Approach](https://analyticsindiamag.com/big-data-to-good-data-andrew-ng-urges-ml-community-to-be-more-data-centric-and-less-model-centric/) - We often try to improve the model by hyperparameter tuning and other regularization techniques, but this approach is more dedicated to improving the training data. In our case our model doesn’t perform well in predicting Target 0 images, so we have to add more labeled Target 0 images to our training data and retrain the model. The initial implementation of manually labeled 78 images gave us a far better performance. But the Data-Centric approach is expensive as we need to manually label the data or use any weak supervision techniques.
+1. [Data-Centric Approach](https://analyticsindiamag.com/big-data-to-good-data-andrew-ng-urges-ml-community-to-be-more-data-centric-and-less-model-centric/) - We often try to improve the model by hyperparameter tuning and other regularization techniques, but this approach is more dedicated to improving the training data. In our case our model doesn’t perform well in predicting Target 0 images, so we have to add more labeled Target 0 images to our training data and retrain the model. The initial implementation of manually labeled 76 images gave us a far better performance. But the Data-Centric approach is expensive as we need to manually label the data or use any weak supervision techniques.
 2. Using our existing model to label the unseen data and retraining our model with newly labeled data.
 3. Fine Tuning pre-trained models like Inceptionv3, NASNetLarge, etc for our use case. But here the model size will be large. Large-size models can be a deployment concern for us, especially when considering the ROI.
 4. Testing with more Image augmentation techniques other than random zoom and brightness[link to code]. Like we can augment the images and add it as additional data, then retrain the model.
 
 
 
+### Deployment Flow
 
 
+Currently deployment of the project is in progress. Our model will be deployed as an API with input request of image tensors or image numpy array and we expect the probability of Target 1 and Target 0 in the response of that API call. Also, one of the better methods to reduce the API call and image requests is by identifying the relevant products at the product title level. We will use our string matching function to validate the product title, if the function returns True we will save the data if false then we will send the request to the product image and validate that image with the model API call.
+
+
+the expected flow of the Scrapy spider will be as follows:
+
+<p align="center">
+  <img width="300" height="700" src="https://user-images.githubusercontent.com/78400305/218374956-4306fdf8-25d0-494d-bc4c-bec66fa61f43.png">
+</p>
 
 
 
