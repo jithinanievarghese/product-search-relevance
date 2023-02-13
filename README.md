@@ -8,18 +8,18 @@
 
 ## Introduction
 
-Eccomerce web scraping provides insight into pricing data, market dynamics, and competitors’ practices. But often a particular search query for a product in an e-commerce website may give us non-relevant products in our data. 
+E-commerce web scraping provides valuable insights into pricing data, market dynamics, and competitors practices.   
+But often a particular search query in an e-commerce website may give us non-relevant products in our data. 
 
-For example, search queries `spider man car toy` and `spider man jacket` on the eCommerce website [flipkart.com](https://www.flipkart.com/search?q=spider%20man%20jacket&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off) gave us some products that are unrelated to spiderman.  
+For example, search queries `spider man car toy` and `spider man jacket` on the e-commerce website [flipkart.com](https://www.flipkart.com/search?q=spider%20man%20jacket&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off) gave us some products that are not related to spiderman car toy or jacket.  
+
 <img src="https://user-images.githubusercontent.com/78400305/218292800-df0aefcb-dcf2-4011-b90d-8ab2e3d92904.png" width="500" height="300"><img src="https://user-images.githubusercontent.com/78400305/218292673-237924c3-b61b-4668-aaeb-c77a95c43fc0.png" width="500" height="300">
 
-In a real-world scenario, we won't be using 3-4 keywords in our search, but more than 50 or 100 or even more. 
-
-
-
-So manually identifying the unwanted products in a large amount of data is a tedious task. Also, we don't scrape data once but on a daily, weekly, or monthly basis for price monitoring.
-Also to identify the new relevant products that are launched by our competitors, we need an automated solution.
-
+- In a real-world scenario, we won't be using 3-4 keywords in e-commerce scraping, but more than 50 or 100 or even more. 
+- So manually identifying the unwanted products in a large amount of data is a tedious task. 
+- These kind of non-relevant data are outliers in our gathered data and they dont add any value to our business requirements or data analysis
+- Also, we don't scrape data once, but on a daily, weekly, or monthly basis for price monitoring or to identify the new products that are launched by our competitors. 
+- So what if we need an automated solution for this i.e we can identify the unwanted products during the scraping and provide a clean dataset to our price monitoring or data analysis platform.
 
 
 ## Approach to the Problem
@@ -87,7 +87,7 @@ time taken to process 0.0004353523254394531 seconds
 
 ```
 
-But the major drawback with this approach is the relevant products with titles that don't have the keyword related to our search query will be missed from our final data.
+But the major drawback with this approach is that the relevant products with titles that don't have the keyword related to our search query will be missed from our final data.
 
 Example for the following [product](https://www.flipkart.com/viaan-boys-cartoon-superhero-cotton-blend-t-shirt/p/itm4e53e909cfe2f?pid=KTBFTMVYQECWS8RG&lid=LSTKTBFTMVYQECWS8RG6PPDJ4&marketplace=FLIPKART&q=spiderman+t+shirt&store=clo%2Fash%2Fank%2Fpgi&srno=s_1_18&otracker=search&otracker1=search&fm=Search&iid=6aad40ff-eaa0-444f-8551-64fd3b1fda33.KTBFTMVYQECWS8RG.SEARCH&ppt=sp&ppn=sp&ssid=ozsx5aobzk0000001676176907270&qH=2209dc77098ed2d6)  `Boys Cartoon/Superhero Cotton Blend T Shirt  (White, Pack of 1)` we can’t identify the title as a relevant one since it doesn't have any term related to spiderman. So the only way to identify them is from their product image.
 
@@ -95,18 +95,22 @@ Example for the following [product](https://www.flipkart.com/viaan-boys-cartoon-
 
 ### Image classification
 So with the help of image classification, we can identify the products. But for that, we need to gather the images of products along with other product page requests in the data gathering. 
-If we have 50k products, we need to send an additional 50k image requests to the image URLs of products which adds up to the cost of data gathering.
+If we have 50k products, we need to send an additional 50k image requests to the image URLs of products which adds up to the cost of data gathering (We can reduce the image requests, discussed later in [Deployment, Scrape Flow and Conclusion](https://github.com/jithinanievarghese/product-search-relevance/edit/main/README.md#deployment-flow-and-conclusion)).
 
-Also training a model, its optimization, developer cost, and deployment also add up to the entire cost. So implementing image classification really depends on our ROI. 
-So it is our call to decide whether we need to implement the image classification model for finding the product images. 
-If that approach really adds value to our business requirements, then we should implement it.
+- Also training a model, its optimization, developer cost, and deployment also add up to the entire cost. So implementing image classification really depends on our ROI. 
+- So it is our call to decide whether we need to implement the image classification model for finding the product images. 
+- If that approach really adds value to our business requirements, then we should implement it.
 
-For now, we have gathered data for 5 search queries "spider man car toy", "spider man mug", "spider man jacket", "spider man hoodies" and "spiderman t shirt". The total unique products for all search queries at the time of scraping was 2233. 
-We are considering this problem as a binary image classification problem and our performance metrics will be f1-score and confusion matrix over accuracy since we need to know how well our model is going to identify the relevant products.
+For now, we have gathered data for 5 search queries "spider man car toy", "spider man mug", "spider man jacket", "spider man hoodies" and "spiderman t shirt". 
+- The total unique products for all search queries at the time of scraping was 2233. 
+- We are considering this problem as a binary image classification problem.
+- Our performance metrics will be f1-score and confusion matrix over accuracy since we need to know how well our model is going to identify the relevant products.
 
-But do we have any labeled training data? 
+But do we have any labeled training data 🤔? 
 Yes, we have partial training data 😃💡.
-In the entire process of finding the relevant title using a string matching algorithm, we got around 1175 out of 2233 products as relevant ones, this is a form of weak supervision to label the data.
+
+- In the entire process of finding the relevant title using a string matching algorithm, we got around 1175 out of 2233 products as relevant ones, this is a form of weak supervision to label the data.
+
 ```python
 start = time()
 print("total no of products:", df.shape[0])
@@ -212,7 +216,7 @@ On the final predictions of model on unseen or unidentified product images 317 p
   <img width="500" height="400" src="https://user-images.githubusercontent.com/78400305/218379926-9f52f902-70b9-4615-b1fe-10b461107f0a.png">
 </p>
 
-### Deployment Flow and Conclusion
+### Deployment, Scrape Flow and Conclusion
 
 Currently deployment of the project is in progress. Our model will be deployed as an API with input request of image tensors or image numpy array and we expect the probability of Target 1 and Target 0 in the response of that API call. Also, one of the better methods to reduce the API call and image requests is by identifying the relevant products at the product title level. We will use our string matching function to validate the product title, if the function returns True we will save the data if false then we will send the request to the product image and validate that image with the model API call.
 
