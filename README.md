@@ -155,9 +155,10 @@ So our final training data contains
 <img src="https://user-images.githubusercontent.com/78400305/218319617-413db23d-9765-4900-a671-862d73595f83.png" width="1000" height="200">
 
 #### Model Training
- 
-Here we have trained a deep-learning CNN network using PyTorch. The training of the model was done using the following Kaggle Notebook. 
-[Kaggle Notebook]  
+##### Code: https://github.com/jithinanievarghese/image_classification_pytorch
+
+Here we have trained a deep-learning CNN network using PyTorch. The training of the model was done using the following 
+[Kaggle Notebook](https://www.kaggle.com/code/jithinanievarghese/image-classification-pytorch).  
 Image Augmentation, Early Stopping and Dropout Layers were added to reduce overfitting.
 
 #### Model Performance
@@ -174,7 +175,7 @@ Even though our accuracy is **98.26%**, When we inspect the validation and train
 </p>
 
 #### Model Performance Validation and Inference
-Deatiled  in [Inference notebook]
+Detailed  in [Inference notebook](https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb)  
 To validate the perfomance of our model on unseen datasets, we gathered a subset of 28 images from unidentified products.
 <p align="center">
 <img src="https://user-images.githubusercontent.com/78400305/218323450-ded93a8e-0313-4569-90f2-9c18383eae65.png" width="900" height="400">
@@ -204,13 +205,14 @@ Also, the model miss predicted 5 non-relevant products as Target 1 or relevant o
 4. Testing with more Image augmentation techniques other than random zoom and brightness[link to code]. Like we can augment the images and add it as additional data, then retrain the model.
 
 ##### Final Predictions
+Detailed  in [Inference notebook](https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb)
+
 On the final predictions of model on unseen or unidentified product images 317 products predicted as relevant and 198 as non-relevant
 <p align="center">
   <img width="500" height="400" src="https://user-images.githubusercontent.com/78400305/218379926-9f52f902-70b9-4615-b1fe-10b461107f0a.png">
 </p>
 
 ### Deployment Flow
-
 
 Currently deployment of the project is in progress. Our model will be deployed as an API with input request of image tensors or image numpy array and we expect the probability of Target 1 and Target 0 in the response of that API call. Also, one of the better methods to reduce the API call and image requests is by identifying the relevant products at the product title level. We will use our string matching function to validate the product title, if the function returns True we will save the data if false then we will send the request to the product image and validate that image with the model API call.
 
@@ -221,7 +223,17 @@ the expected flow of the Scrapy spider will be as follows:
   <img width="300" height="700" src="https://user-images.githubusercontent.com/78400305/218374956-4306fdf8-25d0-494d-bc4c-bec66fa61f43.png">
 </p>
 
+### Resources
+Data Gathering Spider(Scrapy):    
+Data preprocessing:   
+Image Classification Code : https://github.com/jithinanievarghese/image_classification_pytorch  
+Kaggle Notebook: https://www.kaggle.com/code/jithinanievarghese/image-classification-pytorch    
+Inference Notebook: https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb
 
+### References
 
+1. [Practical Natural Language Processing](https://www.oreilly.com/library/view/practical-natural-language/9781492054047/)
+2. [Approaching (Almost) Any Machine Learning Problem](https://books.google.co.in/books/about/Approaching_Almost_Any_Machine_Learning.html?id=ZbgAEAAAQBAJ&source=kp_book_description&redir_esc=y)
+3. https://scrapy.org/
 
 
