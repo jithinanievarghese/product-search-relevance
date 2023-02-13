@@ -243,8 +243,8 @@ The expected flow of the Scrapy spider will be as follows:
 
 Data Gathering Spider(Scrapy): https://github.com/jithinanievarghese/flipkart_scraper_scrapy     
 Data preprocessing:  [data preprocesing product search relevance](https://github.com/jithinanievarghese/flipkart_scraper_scrapy/blob/main/flipkart_scraper/flipkart_scraper/data%20preprocesing%20product%20search%20relevance.ipynb)  
-Image Classification Code : https://github.com/jithinanievarghese/image_classification_pytorch  
-Kaggle Notebook: https://www.kaggle.com/code/jithinanievarghese/image-classification-pytorch      
+Image Classification Code : https://github.com/jithinanievarghese/image_classification_pytorch   
+Kaggle Notebook: https://www.kaggle.com/code/jithinanievarghese/image-classification-pytorch        
 Inference Notebook: https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb
 
 ### References
