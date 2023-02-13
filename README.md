@@ -195,6 +195,7 @@ Also, the model miss predicted 5 non-relevant products as Target 1 or relevant o
 </p>
 
 
+
 ##### Some of the optimization techniques are:
 
 1. [Data-Centric Approach](https://analyticsindiamag.com/big-data-to-good-data-andrew-ng-urges-ml-community-to-be-more-data-centric-and-less-model-centric/) - We often try to improve the model by hyperparameter tuning and other regularization techniques, but this approach is more dedicated to improving the training data. In our case our model doesn’t perform well in predicting Target 0 images, so we have to add more labeled Target 0 images to our training data and retrain the model. The initial implementation of manually labeled 76 images gave us a far better performance. But the Data-Centric approach is expensive as we need to manually label the data or use any weak supervision techniques.
@@ -202,7 +203,11 @@ Also, the model miss predicted 5 non-relevant products as Target 1 or relevant o
 3. Fine Tuning pre-trained models like Inceptionv3, NASNetLarge, etc for our use case. But here the model size will be large. Large-size models can be a deployment concern for us, especially when considering the ROI.
 4. Testing with more Image augmentation techniques other than random zoom and brightness[link to code]. Like we can augment the images and add it as additional data, then retrain the model.
 
-
+##### Final Predictions
+On the final predictions of model on unseen or unidentified product images 317 products predicted as relevant and 198 as non-relevant
+<p align="center">
+  <img width="500" height="400" src="https://user-images.githubusercontent.com/78400305/218379926-9f52f902-70b9-4615-b1fe-10b461107f0a.png">
+</p>
 
 ### Deployment Flow
 
