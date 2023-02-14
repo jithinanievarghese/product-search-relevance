@@ -36,6 +36,8 @@ One  cost-effective way is to use a rule-based approach or use string matching a
 from string import punctuation
 from nltk.tokenize import word_tokenize
 from rapidfuzz import fuzz
+from time import time
+
 
 def clean_white_space(text):
     """
@@ -75,10 +77,20 @@ def string_match_with_rules(text):
     naive_search = ["spiderman" in text, "spider man" in text, "spidey" in text, "spider" in text]
     if any(naive_search):
         return True
-    
+        
+title = "SEMAPHORE bobblehead Toys Action Figure and Car Dashboard Interior Accessories(SPIDERMAN) Compatible with Hyundai Verna"
+print("product title:",title)
+start = time()
+print("\nstring match with rules , title match:", string_match_with_rules(title))
+print(f"time taken to process {time()-start} seconds\n")
+start = time()
+print("string match with Levenshtein Distance (partial ratio), title match:", string_match_with_fuzz(title))
+print(f"time taken to process {time()-start} seconds")
 ```
 #### Output
 ```python
+product title: SEMAPHORE bobblehead Toys Action Figure and Car Dashboard Interior Accessories(SPIDERMAN) Compatible with Hyundai Verna
+
 string match with rules , title match: True
 time taken to process 0.00020599365234375 seconds
 
@@ -108,7 +120,7 @@ For now, we have gathered data for 5 search queries `spider man car toy`, `spide
 - Our performance metrics will be f1-score and confusion matrix over accuracy since we need to know how well our model is going to identify the relevant products.
 
 But do we have any labeled training data 🤔? 
-Yes, we have partial labeled training data 😃💡.
+Yes, we have partially labeled training data 😃💡.
 
 - In the entire process of finding the relevant title using a string matching algorithm, we got around 1175 out of 2233 products as relevant ones, this is a form of weak supervision to label the data.
 
@@ -182,12 +194,12 @@ Even though our accuracy is **98.26%**, When we inspect the validation and train
 
 #### Inference
 ##### Code: [Inference notebook](https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb)  
-To validate the perfomance of our model on unseen datasets, we gathered a subset of 28 images from unidentified products.
+To validate the perfomance of our model on test dataset, we gathered a subset of 28 images (from unseen images and images in training data).
 <p align="center">
 <img src="https://user-images.githubusercontent.com/78400305/218323450-ded93a8e-0313-4569-90f2-9c18383eae65.png" width="900" height="400">
 </p>
 
-- The accuracy of our model on unseen data is only **76.92%** but we have a better f1 score of **80%**. 
+- The accuracy of our model on test data is only **76.92%** but we have a better f1 score of **80%**. 
 - When we inspect the confusion matrix, out of 13 relevant products we predicted 12 products correctly, there was only one miss prediction.
 - So model performs well in identifying the relevant products.
 - Also, the model miss predicted 5 non-relevant products as Target 1 or relevant ones. But as we discussed earlier, our primary aim was to identify relevant products. 
