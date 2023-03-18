@@ -234,9 +234,13 @@ On the final predictions of model on unseen or unidentified product images, 317 
 
 ### Deployment, Scrape Flow and Conclusion
 
-Since we need to find the relevant products during scraping, we need to deploy the model as an API (Currently deployment of the project is in progress.). Our model will be deployed as an API with input request of image path from our cloud platform or image url.  
-We expect the probability of Target 1 and Target 0 in the response of that API call. 
+Since we need to find the relevant products during scraping, we need to deploy the model as an API. Our model will be deployed as an API with input request of image content. We expect the probability of Target 1 and Target 0 in the response of that API call.   
 
+Model was deployed using [ONNXRUNTIME](https://onnxruntime.ai/docs/get-started/with-python.html) and [FastAPI](https://fastapi.tiangolo.com/)
+
+##### Code: https://github.com/jithinanievarghese/fast_api_onnxruntime_deployment  
+
+#### Scrape Flow
 - We will be using a combination of both NLP and image classification.
 - At first we will try to identify the relevant products at the product title level by our string matching algorithm. 
 - Major benefit is that we can reduce the image request for that identified product title, thereby reducing the cost in data gathering.
@@ -257,7 +261,8 @@ Data Gathering Spider(Scrapy): https://github.com/jithinanievarghese/flipkart_sc
 Data preprocessing:  [data preprocesing product search relevance](https://github.com/jithinanievarghese/flipkart_scraper_scrapy/blob/main/flipkart_scraper/flipkart_scraper/data%20preprocesing%20product%20search%20relevance.ipynb)  
 Image Classification Code : https://github.com/jithinanievarghese/image_classification_pytorch   
 Kaggle Notebook: https://www.kaggle.com/code/jithinanievarghese/image-classification-pytorch        
-Inference Notebook: https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb
+Inference Notebook: https://github.com/jithinanievarghese/image_classification_pytorch/blob/main/inference.ipynb  
+Model Deployment: https://github.com/jithinanievarghese/fast_api_onnxruntime_deployment
 
 ### References
 
